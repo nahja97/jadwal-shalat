@@ -1,25 +1,24 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ReactComponent as NxLogo } from '../public/nx-logo-white.svg';
+import Default from "../layouts/Default"
+import Login from "../layouts/Login"
 import './styles.css';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
+  const Layout = pageProps.layout == 'login' ? Login : Default
   return (
     <>
       <Head>
-        <title>Welcome to jadwal-shalat!</title>
+        <title>{pageProps.layout == 'login' ? 'Login Page' : (pageProps.meta?.title != undefined ? pageProps.meta?.title + ' - Jadwal Shalat' : 'Jadwal Shalat')}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content= {pageProps.layout == 'login' ? 'Login Page' : (pageProps.meta?.description != undefined ? pageProps.meta?.description : 'Jadwal Shalat')}/>
       </Head>
-      <div className="app">
-        <header className="flex">
-          <NxLogo width="75" height="50" />
-          <h1>Welcome to jadwal-shalat!</h1>
-        </header>
-        <main>
-          <Component {...pageProps} />
-        </main>
-      </div>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }
 
-export default CustomApp;
+export default App;
