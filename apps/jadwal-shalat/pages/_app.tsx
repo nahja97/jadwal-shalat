@@ -1,12 +1,13 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ReactComponent as NxLogo } from '../public/nx-logo-white.svg';
 import Default from "../layouts/Default"
 import Login from "../layouts/Login"
 import './styles.css';
+import '../styles/global.css';
 
 function App({ Component, pageProps }: AppProps) {
   const Layout = pageProps.layout == 'login' ? Login : Default
+  console.log(pageProps.layout)
   return (
     <>
       <Head>
