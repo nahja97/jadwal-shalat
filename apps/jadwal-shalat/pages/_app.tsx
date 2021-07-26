@@ -1,13 +1,12 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import Default from "../layouts/Default"
-import Login from "../layouts/Login"
+import Default from "../components/layouts/Default"
+import Login from "../components/layouts/Login"
 import './styles.css';
 import '../styles/global.css';
 
 function App({ Component, pageProps }: AppProps) {
   const Layout = pageProps.layout == 'login' ? Login : Default
-  console.log(pageProps.layout)
   return (
     <>
       <Head>
