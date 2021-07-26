@@ -1,0 +1,13 @@
+.table_container {
+    display: flex;
+    justify-content: center;
+    font-family: 'nova', sans-serif;
+}
+
+.table_container > table {
+    text-align: left;
+}
+
+.table_container > table td {
+    padding-left: 5%;
+}
