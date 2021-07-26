@@ -4,6 +4,7 @@ import Default from "../components/layouts/Default"
 import Login from "../components/layouts/Login"
 import './styles.css';
 import '../styles/global.css';
+import MenuBar from '../components/MenuBar'
 
 function App({ Component, pageProps }: AppProps) {
   const Layout = pageProps.layout == 'login' ? Login : Default
@@ -15,6 +16,7 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="description" content= {pageProps.layout == 'login' ? 'Login Page' : (pageProps.meta?.description != undefined ? pageProps.meta?.description : 'Jadwal Shalat')}/>
       </Head>
       <Layout>
+        <MenuBar></MenuBar>
         <Component {...pageProps} />
       </Layout>
     </>
