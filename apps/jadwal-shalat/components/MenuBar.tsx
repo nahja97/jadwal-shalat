@@ -10,6 +10,7 @@ function MenuBar() {
         document.querySelector("."+styles.x).className += " "+styles.collapse
         document.querySelector("."+styles.y).className += " "+styles.collapse
         document.querySelector("."+styles.z).className += " "+styles.collapse
+        document.querySelector("."+styles.circle_container).className += " "+styles.collapse
         document.querySelectorAll("."+styles.menu+" li").forEach(function(item) {
             item.className += " "+styles.animate
         })
@@ -41,10 +42,12 @@ function MenuBar() {
             document.querySelector("."+styles.x).classList.remove(styles.rotate45)
             document.querySelector("."+styles.z).classList.remove(styles.rotate135)
 		}, 120);
+        setTimeout(function() {
+            document.querySelector("."+styles.circle_container).classList.remove(styles.collapse)
+        }, 500)
     }
 
     function changeMode() {
-        console.log()
         if (mode == 'close') {
             openMenu()
             setMode('open')
@@ -60,7 +63,7 @@ function MenuBar() {
         </div>
         
         <div className={styles.menu}>
-            <ul>
+            <ul onClick={changeMode}>
                 <li>
                     <Link href="/auth/login">
                         Login
@@ -69,6 +72,11 @@ function MenuBar() {
                 <li>
                     <Link href="/about">
                         About
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/">
+                        Jadwal Shalat
                     </Link>
                 </li>
             </ul>

@@ -15,8 +15,8 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content= {pageProps.layout == 'login' ? 'Login Page' : (pageProps.meta?.description != undefined ? pageProps.meta?.description : 'Jadwal Shalat')}/>
       </Head>
+      <MenuBar></MenuBar>
       <Layout>
-        <MenuBar></MenuBar>
         <Component {...pageProps} />
       </Layout>
     </>
