@@ -22,10 +22,15 @@ function ClockAnimation({sunrise, sunset}) {
 
     useEffect(() => {
         if (currentMinutes > sunset || currentMinutes < sunrise) {
-            setMode('dark')
             let percentage = (currentMinutes > sunset ? currentMinutes-sunset : currentMinutes < sunrise ? (midnight-sunset)+currentMinutes : currentMinutes)/rangeNight
-            setPos(percentage*180)
+            setMode('dark')
             setIcon(moon)
+            setPos(percentage*180)
+        } else {
+            let percentage = (currentMinutes - sunrise)/rangeLight
+            setMode('light')
+            setIcon(sun)
+            setPos(percentage*180)
         }
     })
 

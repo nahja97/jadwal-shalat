@@ -9,39 +9,39 @@ function Table({schedule}) {
                 <tbody>
                     <tr>
                         <th>Tengah Malam</th>
-                        <td>{schedule['Midnight']}</td>
+                        <td>{schedule.midnight}</td>
                     </tr>
                     <tr>
                         <th>Imsak</th>
-                        <td>{schedule['Imsak']}</td>
+                        <td>{schedule.imsak}</td>
                     </tr>
                     <tr>
                         <th>Fajar</th>
-                        <td>{schedule['Fajr']}</td>
+                        <td>{schedule.fajr}</td>
                     </tr>
                     <tr>
                         <th>Terbit Matahari</th>
-                        <td>{schedule['Sunrise']}</td>
+                        <td>{schedule.sunrise}</td>
                     </tr>
                     <tr>
                         <th>Dzuhur</th>
-                        <td>{schedule['Dhuhr']}</td>
+                        <td>{schedule.dhuhr}</td>
                     </tr>
                     <tr>
                         <th>Ashar</th>
-                        <td>{schedule['Asr']}</td>
+                        <td>{schedule.asr}</td>
                     </tr>
                     <tr>
                         <th>Tenggelam Matahari</th>
-                        <td>{schedule['Sunset']}</td>
+                        <td>{schedule.sunset}</td>
                     </tr>
                     <tr>
                         <th>Maghrib</th>
-                        <td>{schedule['Maghrib']}</td>
+                        <td>{schedule.maghrib}</td>
                     </tr>
                     <tr>
                         <th>Isya'</th>
-                        <td>{schedule['Isha']}</td>
+                        <td>{schedule.isha}</td>
                     </tr>
                 </tbody>
             </table>

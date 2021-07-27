@@ -30,6 +30,7 @@
     width: 50vh;
     margin-top: -50px;
     position: relative;
+    background-color: unset;
 }
 
 #line > div {
@@ -40,6 +41,14 @@
     border-top-left-radius: calc(25vh + 5px);
     border-top-right-radius: calc(25vh + 5px);
     border-bottom: 0;
-    border: solid var(--light);
+    border: solid 5px;
+}
+
+#line.light > div {
+    border-color: var(--dark);
+}
+
+#line.dark > div {
+    border-color: var(--light);
 }
 
