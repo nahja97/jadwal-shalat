@@ -2,9 +2,9 @@ import React, { useLayoutEffect, FC, useEffect } from "react"
 
 const Default: FC<{}> = ({ children }) => {
   return <>
-    <div className="login_page">
+    <main className="default_page">
       {children}
-    </div>
+    </main>
   </>
   
 }

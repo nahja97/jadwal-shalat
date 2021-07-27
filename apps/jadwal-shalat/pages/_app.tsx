@@ -1,9 +1,10 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ReactComponent as NxLogo } from '../public/nx-logo-white.svg';
-import Default from "../layouts/Default"
-import Login from "../layouts/Login"
+import Default from "../components/layouts/Default"
+import Login from "../components/layouts/Login"
 import './styles.css';
+import '../styles/global.css';
+import MenuBar from '../components/MenuBar'
 
 function App({ Component, pageProps }: AppProps) {
   const Layout = pageProps.layout == 'login' ? Login : Default
@@ -14,6 +15,7 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content= {pageProps.layout == 'login' ? 'Login Page' : (pageProps.meta?.description != undefined ? pageProps.meta?.description : 'Jadwal Shalat')}/>
       </Head>
+      <MenuBar></MenuBar>
       <Layout>
         <Component {...pageProps} />
       </Layout>

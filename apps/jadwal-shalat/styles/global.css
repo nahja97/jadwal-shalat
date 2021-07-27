@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+}
+
+:root {
+    --light: #F8F8F8;
+    --dark: #3A3A3A;
+}
+
+h1, h2 {
+    font-family: 'ooredoo', sans-serif;
+}
+
+@font-face {
+    font-family: "ooredoo";
+    src: url("/fonts/ooredoo.otf");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "nova";
+    src: url("/fonts/nova.ttf");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
