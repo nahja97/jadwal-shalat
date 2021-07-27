@@ -1,0 +1,25 @@
+.light {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.dark {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+h1.title {
+    margin: 0;
+    text-align: center;
+    padding-top: 5%;
+}
+
+form.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form_input > input{
+    color: var(--light)
+}
