@@ -1,0 +1,96 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreatePermissionInput {
+  name: String!
+}
+
+input CreateRoleInput {
+  name: String!
+  permissions: [String!]!
+}
+
+input CreateUserInput {
+  name: String!
+  password: String!
+  role: String!
+  username: String!
+}
+
+input ListPermissionInput {
+  _id: String
+  name: String
+}
+
+input ListRoleInput {
+  _id: String
+  name: String
+  permissions: [String!]
+}
+
+input ListUserInput {
+  _id: String
+  name: String
+  role: String
+  username: String
+}
+
+type Mutation {
+  createPermission(payload: CreatePermissionInput!): Permission!
+  createRole(payload: CreateRoleInput!): Role!
+  createUser(payload: CreateUserInput!): User!
+  deletePermission(_id: String!): Permission!
+  deleteRole(_id: String!): Role!
+  deleteUser(_id: String!): User!
+  updatePermission(payload: UpdatePermissionInput!): Permission!
+  updateRole(payload: UpdateRoleInput!): Role!
+  updateUser(payload: UpdateUserInput!): User!
+}
+
+type Permission {
+  _id: String!
+  name: String!
+}
+
+type Query {
+  permission(_id: String!): Permission!
+  permissions(filters: ListPermissionInput): [Permission!]!
+  role(_id: String!): Role!
+  roles(filters: ListRoleInput): [Role!]!
+  user(_id: String!): User!
+  users(filters: ListUserInput): [User!]!
+}
+
+type Role {
+  _id: String!
+  name: String!
+  permissions(populate: Boolean!): [Permission!]!
+}
+
+input UpdatePermissionInput {
+  _id: String
+  name: String
+}
+
+input UpdateRoleInput {
+  _id: String
+  name: String
+  permissions: [String!]
+}
+
+input UpdateUserInput {
+  _id: String
+  name: String
+  password: String
+  role: String
+  username: String
+}
+
+type User {
+  _id: String!
+  name: String!
+  password: String!
+  role(populate: Boolean!): Role!
+  username: String!
+}
