@@ -2,9 +2,11 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model, Schema as MongooseSchema } from 'mongoose'
 
+
 import { User, UserDocument } from './model/users.model'
 import {
   CreateUserInput,
+  ListUserAuth,
   ListUserInput,
   UpdateUserInput,
 } from './users.inputs'
@@ -36,5 +38,9 @@ export class UsersService {
 
   delete(_id: MongooseSchema.Types.ObjectId) {
     return this.userModel.findByIdAndDelete(_id).exec()
+  }
+
+  login(_id: MongooseSchema.Types.ObjectId) {
+    return this.userModel.findById(_id, '_id name username role').exec()
   }
 }

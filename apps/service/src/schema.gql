@@ -2,6 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Auth {
+  _id: String!
+  access_token: String!
+  name: String!
+  role: Role!
+  username: String!
+}
+
 input CreatePermissionInput {
   name: String!
 }
@@ -29,6 +37,11 @@ input ListRoleInput {
   permissions: [String!]
 }
 
+input ListUserAuth {
+  password: String!
+  username: String!
+}
+
 input ListUserInput {
   _id: String
   name: String
@@ -43,6 +56,7 @@ type Mutation {
   deletePermission(_id: String!): Permission!
   deleteRole(_id: String!): Role!
   deleteUser(_id: String!): User!
+  login(payload: ListUserAuth!): Auth!
   updatePermission(payload: UpdatePermissionInput!): Permission!
   updateRole(payload: UpdateRoleInput!): Role!
   updateUser(payload: UpdateUserInput!): User!

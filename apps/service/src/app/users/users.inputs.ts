@@ -19,6 +19,15 @@ export class CreateUserInput {
 }
 
 @InputType()
+export class ListUserAuth {
+  @Field(() => String)
+  username: string
+
+  @Field(() => String)
+  password: string
+}
+
+@InputType()
 export class ListUserInput {
   @Field(() => String, { nullable: true })
   _id?: MongooseSchema.Types.ObjectId

@@ -9,6 +9,8 @@ import { UsersModule } from './app/users/users.module'
 
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+// import { AuthService } from './app/auth/auth.service'
+
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { AppService } from './app.service'
     }),
     PermissionsModule,
     RolesModule,
-    UsersModule
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
