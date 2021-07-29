@@ -14,12 +14,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "YTBjNDFmMDgtOThlOS00MzcwLTgyYmMtZTJmM2UxODA3NzUxfHJlYWQtd3JpdGU=",
         "canTrackAnalytics": false,
         "showUsageWarnings": true
@@ -40,9 +35,10 @@
     },
     "jadwal-shalat-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "jadwal-shalat"
-      ]
+      "implicitDependencies": ["jadwal-shalat"]
+    },
+    "service": {
+      "tags": []
     }
   }
 }
