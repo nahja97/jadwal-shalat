@@ -8,7 +8,6 @@ import {
   } from '@nestjs/graphql'
 import { Schema as MongooseSchema } from 'mongoose'
 import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
 
 const round = 10
 const salt = bcrypt.genSaltSync(round);
@@ -20,6 +19,7 @@ import {
   CreateUserInput,
   ListUserAuth,
   ListUserInput,
+  RefreshTokenAuth,
   UpdateUserInput,
 } from './users.inputs'
 
@@ -29,7 +29,7 @@ import { UseGuards } from '@nestjs/common';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private userService: UsersService, private readonly jwtService: JwtService) {}
+  constructor(private userService: UsersService, ) {}
 
   @UseGuards(GqlAuthGuard)
   @Query(() => User)
@@ -39,6 +39,7 @@ export class UsersResolver {
     return this.userService.getById(_id)
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => [User])
   async users(
     @Args('filters', { nullable: true }) filters?: ListUserInput,
@@ -53,11 +54,13 @@ export class UsersResolver {
     return this.userService.create(payload)
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => User)
   async updateUser(@Args('payload') payload: UpdateUserInput) {
     return this.userService.update(payload)
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => User)
   async deleteUser(
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
@@ -79,18 +82,51 @@ export class UsersResolver {
         role: userData.role,
         username: userData.username
       }
-      const token = this.jwtService.sign(dataToken)
 
+      console.log(dataToken.role)
+      const accessToken = this.userService.createAccessToken(dataToken)
+      const refreshToken = this.userService.createRefreshToken({_id: dataToken._id, access_token: accessToken})
+      
       const response = {
         '_id': userData._id,
         'username': userData.username,
         'name': userData.name,
         'role': (await userData.populate({ path: 'role', model: Role.name }).execPopulate()).role,
-        'access_token': token,
+        'access_token': accessToken,
+        'refresh_token': refreshToken,
       }
       return response
     }
     return null
+  }
+
+  @Mutation(() => Auth)
+  async refreshToken(
+    @Args('payload') payload?: RefreshTokenAuth,
+  ) {
+    try {
+      const userData = await this.userService.assignRefreshToken(payload)
+      const dataToken = {
+        _id: userData._id,
+        name: userData.name,
+        role: userData.role,
+        username: userData.username
+      }
+      const accessToken = this.userService.createAccessToken(dataToken)
+      const refreshToken = this.userService.createRefreshToken({_id: dataToken._id, access_token: accessToken})
+      const response = {
+        '_id': userData._id,
+        'username': userData.username,
+        'name': userData.name,
+        'role': (await userData.populate({ path: 'role', model: Role.name }).execPopulate()).role,
+        'access_token': accessToken,
+        'refresh_token': refreshToken,
+      }
+
+      return response
+    } catch(err) {
+      throw new Error(err)
+    }
   }
 
   @ResolveField()

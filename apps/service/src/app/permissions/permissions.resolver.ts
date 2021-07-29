@@ -13,6 +13,8 @@ import {
   ListPermissionInput,
   UpdatePermissionInput,
 } from './permissions.inputs'
+import { GqlAuthGuard } from '../auth/gql-auth.guard'
+import { UseGuards } from '@nestjs/common'
 
 @Resolver(() => Permission)
 export class PermissionsResolver {
@@ -25,6 +27,7 @@ export class PermissionsResolver {
     return this.permissionService.getById(_id)
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => [Permission])
   async permissions(
     @Args('filters', { nullable: true }) filters?: ListPermissionInput,

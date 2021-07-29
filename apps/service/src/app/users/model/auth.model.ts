@@ -25,6 +25,10 @@ export class Auth {
     @Field(() => String)
     @Prop()
     access_token: string
+
+    @Field(() => String)
+    @Prop()
+    refresh_token: string
 }
 
 export type AuthDocument = Auth & Document

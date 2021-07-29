@@ -6,6 +6,7 @@ type Auth {
   _id: String!
   access_token: String!
   name: String!
+  refresh_token: String!
   role: Role!
   username: String!
 }
@@ -57,6 +58,7 @@ type Mutation {
   deleteRole(_id: String!): Role!
   deleteUser(_id: String!): User!
   login(payload: ListUserAuth!): Auth!
+  refreshToken(payload: RefreshTokenAuth!): Auth!
   updatePermission(payload: UpdatePermissionInput!): Permission!
   updateRole(payload: UpdateRoleInput!): Role!
   updateUser(payload: UpdateUserInput!): User!
@@ -74,6 +76,11 @@ type Query {
   roles(filters: ListRoleInput): [Role!]!
   user(_id: String!): User!
   users(filters: ListUserInput): [User!]!
+}
+
+input RefreshTokenAuth {
+  access_token: String!
+  refresh_token: String!
 }
 
 type Role {

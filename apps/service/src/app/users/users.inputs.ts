@@ -28,6 +28,39 @@ export class ListUserAuth {
 }
 
 @InputType()
+export class RefreshTokenAuth {
+  @Field(() => String)
+  refresh_token: string
+
+  @Field(() => String)
+  access_token: string
+}
+
+@InputType()
+export class AccessTokenPayload {
+  @Field(() => String)
+  _id: any
+
+  @Field(() => String)
+  name: string
+
+  @Field(() => String)
+  username: string
+
+  @Field(() => String)
+  role: MongooseSchema.Types.ObjectId | Role
+}
+
+@InputType()
+export class RefreshTokenPayload {
+  @Field(() => String)
+  _id: any
+
+  @Field(() => String)
+  access_token: string
+}
+
+@InputType()
 export class ListUserInput {
   @Field(() => String, { nullable: true })
   _id?: MongooseSchema.Types.ObjectId
