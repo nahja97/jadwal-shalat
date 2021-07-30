@@ -1,8 +1,12 @@
-import React, { useState }  from 'react';
+import React, { useEffect, useState }  from 'react';
 import Link from 'next/link'
 import styles from '../styles/MenuBar.module.css'
+import { useAuth } from '../lib/auth';
+import { useRouter } from 'next/router';
 
 function MenuBar() {
+    const { isSignedIn, signOut } = useAuth()
+
     const [mode, setMode] = useState('close')
 
     function openMenu() {
@@ -56,6 +60,24 @@ function MenuBar() {
             setMode('close')
         }
     }
+
+    function AuthAction() {
+        if (!isSignedIn()) {
+            return (
+                <Link href="/auth/login">
+                    Login
+                </Link>
+            )
+        } else {
+            return (
+                <a onClick={() => signOut()}>
+                    Logout
+                </a>
+            )
+        }
+        
+    }
+
     return <>
         <div className={styles.navbar}></div>
         <div className={styles.circle_container}>
@@ -65,9 +87,7 @@ function MenuBar() {
         <div className={styles.menu}>
             <ul onClick={changeMode}>
                 <li>
-                    <Link href="/auth/login">
-                        Login
-                    </Link>
+                    <AuthAction/>
                 </li>
                 <li>
                     <Link href="/about">

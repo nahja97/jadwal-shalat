@@ -1,7 +1,9 @@
 import styles from '../../styles/Login.module.css';
 import { Typography, TextField, Button, Snackbar } from "@material-ui/core"
 import { createStyles, makeStyles, Theme, MuiThemeProvider, createTheme } from '@material-ui/core/styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../lib/auth.js'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +35,15 @@ const theme = createTheme({
 
 function Login() {
     const classes = useStyles()
+    const { isSignedIn } = useAuth()
+    const router = useRouter()
 
+    useEffect(() => {
+        if (isSignedIn()) {
+            router.push('/profile')
+        }
+    }, [])
+    
     const [formData, setformData] = useState({
         username: '',
         password: ''
@@ -47,8 +57,17 @@ function Login() {
             [name]: value
           }));
     }
-    function signIn() {
-        console.log(formData)
+    const { signIn, signOut } = useAuth()
+
+    async function onSubmit(e) {
+        e.preventDefault()
+        const payload = {
+            payload: {
+                username: formData.username,
+                password: formData.password
+            }
+        }
+        signIn(payload, '/profile')
     }
 
     return <>
@@ -60,7 +79,7 @@ function Login() {
                     noValidate 
                     autoComplete="on"
                     id="login-form"
-                    onSubmit={signIn}
+                    onSubmit={onSubmit}
                 >
                     <TextField
                         margin="normal"
@@ -99,7 +118,8 @@ function Login() {
                         id={styles.button_submit}
                         className={classes.button}
                         fullWidth
-                        onClick={signIn}
+                        type="submit"
+                        onClick={onSubmit}
                     >
                         Login
                     </Button>

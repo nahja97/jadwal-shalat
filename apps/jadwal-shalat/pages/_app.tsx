@@ -5,11 +5,12 @@ import Login from "../components/layouts/Login"
 import './styles.css';
 import '../styles/global.css';
 import MenuBar from '../components/MenuBar'
+import { AuthProvider } from '../lib/auth.js'
 
 function App({ Component, pageProps }: AppProps) {
   const Layout = pageProps.layout == 'login' ? Login : Default
   return (
-    <>
+    <AuthProvider>
       <Head>
         <title>{pageProps.layout == 'login' ? 'Login Page' : (pageProps.meta?.title != undefined ? pageProps.meta?.title + ' - Jadwal Shalat' : 'Jadwal Shalat')}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -19,7 +20,7 @@ function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </AuthProvider>
   );
 }
 
