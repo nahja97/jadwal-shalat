@@ -20,19 +20,19 @@ function Index({mapToken}) {
 
   async function getSchedule(position) {
     const date = new Date()
-    let time = new Intl.DateTimeFormat('id').format(date);
-    let currentDate = time.toString().split('/')
-    let currentDay = `${currentDate[2]}-${currentDate[1]}-${currentDate[0]}`
+    const time = new Intl.DateTimeFormat('id').format(date);
+    const currentDate = time.toString().split('/')
+    const currentDay = `${currentDate[2]}-${currentDate[1]}-${currentDate[0]}`
     try {
-      let url = `https://api.siforlat.com/api/v1/prayTimes?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&duration=1`
-      let response = await fetch(url)
-      let dataSchedule = await response.json()
+      const url = `https://api.siforlat.com/api/v1/prayTimes?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&duration=1`
+      const response = await fetch(url)
+      const dataSchedule = await response.json()
       setSchedule(dataSchedule.schedules[0])
       let sunrise = (dataSchedule.schedules[0].sunrise).split(':')
       sunrise = (parseInt(sunrise[0])*60) + parseInt(sunrise[1])
       let sunset = (dataSchedule.schedules[0].sunset).split(':')
       sunset = (parseInt(sunset[0])*60) + parseInt(sunset[1])
-      let currentMinute = (date.getHours()*60)+date.getMinutes()
+      const currentMinute = (date.getHours()*60)+date.getMinutes()
       if (sunrise < currentMinute && 
         sunset > currentMinute)
       {
@@ -52,7 +52,7 @@ function Index({mapToken}) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async function(position) {
         try {
-          let res = await fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=' + mapToken)
+          const res = await fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=' + mapToken)
           let data = await res.json()
           if (data) {
             data = data.plus_code.compound_code.split(',')[1]
@@ -76,7 +76,7 @@ function Index({mapToken}) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const layout = 'default'
   const mapToken = process.env.MAP_TOKEN
   return {
