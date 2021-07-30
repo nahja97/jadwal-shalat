@@ -15,7 +15,7 @@ function Index({mapToken}) {
     sunrise: "00:00",
     sunset: "00:00"
   })
-  const [city, setCity] = useState('Kediri')
+  const [city, setCity] = useState('Lokasi Anda')
   const [mode, setMode] = useState('light')
 
   async function getSchedule(position) {
@@ -51,6 +51,7 @@ function Index({mapToken}) {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async function(position) {
+        getSchedule(position)
         try {
           const res = await fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=' + mapToken)
           let data = await res.json()
@@ -58,7 +59,6 @@ function Index({mapToken}) {
             data = data.plus_code.compound_code.split(',')[1]
             data = data.split(' ')
             setCity(data ? data[2] == 'City' ? 'kota '+data[1] : data[1] : 'Tulungagung')
-            getSchedule(position)
           }
         } catch(err) {
           console.log(err)
