@@ -23,7 +23,6 @@ export function AuthProvider({ children }) {
 }
 
 async function assignRefreshToken(accessToken, refreshToken) {
-    console.log('masuk')
     localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')
     localStorage.removeItem('profile')
@@ -63,13 +62,10 @@ async function assignRefreshToken(accessToken, refreshToken) {
         localStorage.setItem('access_token', result.data.refreshToken.access_token)
         localStorage.setItem('refresh_token', result.data.refreshToken.refresh_token)
         localStorage.setItem('profile', JSON.stringify(result.data.refreshToken))
-        // return result.data.refreshToken.access_token
     }
-    // return null
 }
 
 const getAuthHeaders = () => {
-    console.log('ehehe')
     if (typeof window !== 'undefined') {
         if (localStorage.getItem('access_token') && parseJwt(localStorage.getItem('access_token')).exp * 1000 < Date.now()) {
             assignRefreshToken(localStorage.getItem('access_token'), localStorage.getItem('refresh_token'))

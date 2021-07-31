@@ -70,9 +70,9 @@ function MenuBar() {
             )
         } else {
             return (
-                <a onClick={() => signOut()}>
-                    Logout
-                </a>
+                <Link href="/profile">
+                    Profile
+                </Link>
             )
         }
         

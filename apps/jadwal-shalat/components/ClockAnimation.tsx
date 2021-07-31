@@ -2,15 +2,15 @@ import React, { useEffect, useState }  from 'react';
 import Clock from 'react-live-clock';
 import styles from '../styles/ClockAnimation.module.css'
 import Image from 'next/image'
-const moon = '/../public/moon.png'
-const sun = '/../public/sun.png'
+const moon = '/moon.png'
+const sun = '/sun.png'
 
 function ClockAnimation({sunrise, sunset}) {
     const date = new Date()
     const [pos, setPos] = useState(0)
     const [mode, setMode] = useState('light')
     const [icon, setIcon] = useState(sun)
-    let currentMinutes = (date.getHours()*60) + date.getMinutes()
+    const currentMinutes = (date.getHours()*60) + date.getMinutes()
     const midnight = 1381
     sunset = sunset.split(':')
     sunset = (parseInt(sunset[0])*60) + parseInt(sunset[1])
@@ -22,12 +22,12 @@ function ClockAnimation({sunrise, sunset}) {
 
     useEffect(() => {
         if (currentMinutes > sunset || currentMinutes < sunrise) {
-            let percentage = (currentMinutes > sunset ? currentMinutes-sunset : currentMinutes < sunrise ? (midnight-sunset)+currentMinutes : currentMinutes)/rangeNight
+            const percentage = (currentMinutes > sunset ? currentMinutes-sunset : currentMinutes < sunrise ? (midnight-sunset)+currentMinutes : currentMinutes)/rangeNight
             setMode('dark')
             setIcon(moon)
             setPos(percentage*180)
         } else {
-            let percentage = (currentMinutes - sunrise)/rangeLight
+            const percentage = (currentMinutes - sunrise)/rangeLight
             setMode('light')
             setIcon(sun)
             setPos(percentage*180)

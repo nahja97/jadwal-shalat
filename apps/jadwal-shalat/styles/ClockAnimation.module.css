@@ -30,18 +30,17 @@
     width: 50vh;
     margin-top: -50px;
     position: relative;
-    background-color: unset;
 }
 
 #line > div {
     position: absolute;
     width: calc(50vh - 5px);
     height: 25vh;
-    top: calc(-25vh + 0px);
+    top: calc(-25vh - 5px);
     border-top-left-radius: calc(25vh + 5px);
     border-top-right-radius: calc(25vh + 5px);
     border-bottom: 0;
-    border: solid 5px;
+    border: dashed 5px;
 }
 
 #line.light > div {

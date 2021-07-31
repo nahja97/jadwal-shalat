@@ -40,7 +40,7 @@ function Table({schedule}) {
                         <td>{schedule.maghrib}</td>
                     </tr>
                     <tr>
-                        <th>Isya'</th>
+                        <th>Isya&apos;</th>
                         <td>{schedule.isha}</td>
                     </tr>
                 </tbody>

@@ -11,6 +11,9 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: true,
   },
+  images: {
+    domains: [process.env.BASE_URL],
+  },
 };
 
 module.exports = withNx(nextConfig);
